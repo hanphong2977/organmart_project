@@ -1,15 +1,18 @@
+# Base image
 FROM node:18
 
+# Set working directory
 WORKDIR /app
 
-# Copy file cài đặt trước
-COPY package.json package-lock.json ./
-
-# Cài đúng môi trường (Linux)
+# Copy package files and install
+COPY package.json package-lock.json* ./
 RUN npm install
 
-# Sau đó mới copy toàn bộ source
+# Copy full source code
 COPY . .
 
-EXPOSE 19000 19001 19002
-CMD ["npm", "start"]
+# Expo ports
+EXPOSE 19000 19001 19002 8081
+
+# Default command
+CMD ["npm", "run", "start:qr"]

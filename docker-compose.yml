@@ -23,18 +23,19 @@ services:
   frontend:
     build:
       context: ./organmart_app
+      dockerfile: Dockerfile
     container_name: organmart_app
     volumes:
       - ./organmart_app:/app
     working_dir: /app
-    command: ["npm", "start"]
+    command: ["npm", "run", "start:qr"]
+    stdin_open: true
+    tty: true
     ports:
       - "19000:19000"
       - "19001:19001"
       - "19002:19002"
       - "8081:8081"
-    environment:
-      - EXPO_PUBLIC_API_URL=http://backend:8000
     depends_on:
       - backend
     networks:
