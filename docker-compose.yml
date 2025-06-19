@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./organmart_backend
+    container_name: organmart_backend
+    volumes:
+      - ./organmart_backend:/var/www/html
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=organmart
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+    depends_on:
+      - db
+    networks:
+      - organmart_net
+
+  frontend:
+    build:
+      context: ./organmart_app
+    container_name: organmart_app
+    volumes:
+      - ./organmart_app:/app
+    working_dir: /app
+    command: ["npm", "start"]
+    ports:
+      - "19000:19000"
+      - "19001:19001"
+      - "19002:19002"
+      - "8081:8081"
+    environment:
+      - EXPO_PUBLIC_API_URL=http://backend:8000
+    depends_on:
+      - backend
+    networks:
+      - organmart_net
+
+  db:
+    image: mysql:8.0
+    container_name: organmart_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: organmart
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./backup:/docker-entrypoint-initdb.d  # Tự động chạy SQL khôi phục DB
+    networks:
+      - organmart_net
+
+networks:
+  organmart_net:
+
+volumes:
+  db_data:

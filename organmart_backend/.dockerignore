@@ -1,0 +1,13 @@
+node_modules
+vendor
+.git
+.gitignore
+*.log
+*.sqlite
+*.zip
+*.rar
+*.tar.gz
+.idea
+.vscode
+tests
+coverage
