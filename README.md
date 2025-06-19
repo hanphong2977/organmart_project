@@ -35,8 +35,8 @@ DB_DATABASE=organmart
 DB_USERNAME=root
 DB_PASSWORD=root
 
-SANCTUM_STATEFUL_DOMAINS=http://localhost:3000,http://localhost:19006,127.0.0.1:5173,localhost:5173
-CORS_ALLOWED_ORIGINS=http://localhost:3000,http://192.168.1.6:8000,http://192.168.1.6:8081
+SANCTUM_STATEFUL_DOMAINS=http://localhost:3000,http://localhost:19006,127.0.0.1:5173,localhost:5173,http://localhost:19001
+CORS_ALLOWED_ORIGINS=
 ```
 ### 4. Lấy địa chỉ IP nội bộ (IPv4)
 
@@ -51,10 +51,10 @@ ipconfig  # Windows
 ### 5. Cập nhật IP vào các file
 ```bash
 # .env trong organmart_backend
-CORS_ALLOWED_ORIGINS=http://192.168.1.6:8000,http://192.168.1.6:8081
+CORS_ALLOWED_ORIGINS=http://[ipv4]:8000,http://[ipv4]:8081
 # api.ts trong organmart_app/services/
 export const api = axios.create({
-  baseURL: 'http://192.168.1.6:8000/',
+  baseURL: 'http://[ipv4]:8000/',
   withCredentials: true,
 });
 ```
