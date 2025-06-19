@@ -69,7 +69,7 @@ docker-compose exec backend php artisan key:generate
 ```
 ### 7. Truy cập admin dashboard
 ```bash
-  http://192.168.1.6:8000/admin
+  http://[ipv4]:8000/admin
   # tài khoản admin
   # email: admin@example.com
   # pass: 111
@@ -83,4 +83,6 @@ docker-compose exec backend php artisan key:generate
   #tài khoản user 1
   # username: user1
   # pas: 123456789
+  # nếu muốn truy cập bằng web
+  http://[ipv4]:8081/
 ```
